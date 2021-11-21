@@ -1,10 +1,13 @@
 package lambdas.exemples;
 
-import lambdas.utils.Utilitats;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ExerciciL {
 
@@ -26,40 +29,56 @@ public class ExerciciL {
 
         // 1 - Canviar a lambda
         System.out.println("\n1-2");
-        Collections.sort(llista_persones, new Comparator<Persona>() {
+        /*Collections.sort(llista_persones, new Comparator<Persona>() {
             @Override
             public int compare(Persona o1, Persona o2) {
                 if(o1.getNom().charAt(0) >= o2.getNom().charAt(0)) return 1;
                 else return -1;
             }
-        });
+        });*/
+        Stream<Persona> stream2 = Arrays.stream(lpers);
+        stream2.sorted((o1, o2) -> (o1.getNom().compareTo(o2.getNom())))
 
         // 2 - Canviar a Lambda
-        for(Persona p: llista_persones) {
+        /*for(Persona p: llista_persones) {
             System.out.println(p);
-        }
+        }*/
+        .forEach(System.out::println);
 
         // 3 - Canvia a classe anònima
         System.out.println("\n3-4");
         //ordenació alfabètica inversa del nom
-            llista_persones.sort((o1,o2) -> o2.getNom().compareTo(o1.getNom()));
+        Stream<Persona> stream3 = Arrays.stream(lpers);
+            stream3.sorted((o1,o2) -> o2.getNom().compareTo(o1.getNom()))
 
         // 4 - Canvia per una crida al mètode per referència
-        for(Persona p: llista_persones) {
+        /*for(Persona p: llista_persones) {
             System.out.println(p);
-        };
+        };*/
+        .forEach(new Consumer<Persona>() {
+            @Override
+            public void accept(Persona s) {
+                System.out.println(s);
+            }
+        });
 
 
         // 5 - Omplir map. Canviar per un forEach amb lambda
-        for(Persona per : llista_persones) {
+       /* for(Persona per : llista_persones) {
             mapPersones.put(per.getAge(),1);
-        }
+        }*/
+        System.out.println("\n5");
+        Stream<Persona> stream4 = Arrays.stream(lpers);
+        stream4.map(Persona::getAge).distinct().collect(Collectors.toList())
+
 
         // 6 - Canvia per un recorregut forEach amb lambda
-        System.out.println("\n5");
-        for(Map.Entry entry : mapPersones.entrySet()) {
+                .forEach((o1) -> System.out.println(o1 + " : " + 1));
+
+        /*for(Map.Entry entry : mapPersones.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
+        }*/
+
 
 
 

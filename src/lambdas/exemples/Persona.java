@@ -14,6 +14,7 @@ public class Persona implements Comparable<Persona> {
     public enum Genere {
         HOME,DONA
     }
+
     private String nom;
     private Genere genere;
     private LocalDate dataNaixament;
@@ -25,6 +26,7 @@ public class Persona implements Comparable<Persona> {
         this.dataNaixament = dataNaixament;
         cotxe = null;
     }
+
     public String getNom() {
         return nom;
     }
@@ -45,8 +47,9 @@ public class Persona implements Comparable<Persona> {
     }
 
     /*
-     *	@return int Edat de la persona a partir de la data de naixament
+     *    @return int Edat de la persona a partir de la data de naixament
      */
+
     public int getAge() {
         LocalDate today = LocalDate.now();
         if ((dataNaixament != null) && (today != null)) {
@@ -72,9 +75,5 @@ public class Persona implements Comparable<Persona> {
     public String toString() {
         return nom + '\t' + genere.toString() + '\t' + getAge();
     }
-
-
-
 }
-
 
